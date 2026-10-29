@@ -1,0 +1,147 @@
+class product:
+
+    def __init__(self, name, price):
+
+        self.name = name
+
+        self.price = price
+
+
+class BillingApp:
+
+    def __init__(self):
+
+        self.products = []
+
+        self.cart = []
+
+
+    def add_product(self):
+
+        name = input("Enter product name:")
+
+        price = float(input("Enter product price: "))
+
+        self.products.append(product(name, price))
+
+        print("Product addded successfully!\n")
+
+    def show_products(self):
+
+        if not self.products:
+
+            print(" No products available.\n")
+
+            return  
+
+
+
+        print("\n Available Products:")
+
+        for i, product in enumerate(self.products, start=1):
+
+            print(f"{i}. {product.name} - ${product.price}")
+
+        print() 
+
+
+    def add_to_cart(self):
+
+        self.show_products()
+
+        if not self.products:
+
+            return
+
+
+
+        choice = int(input("Enter product number to add to cart:"))
+
+        if 1 <= len(self.products):
+
+            quantity = int(input("Enter quantity:"))
+
+            product = self.products[choice - 1]
+
+            self.cart.append((product, quantity))
+
+            print("Add to cart!\n")
+
+        else:
+
+            print("Invalid choice!\n")
+
+
+    def generate_bill(self):
+
+        if not self.cart:
+
+            print("Cart is empty. \n")
+
+            return
+
+
+        print("\n Final Bill:")
+
+        total = 0
+
+        for product, qty in self.cart:
+
+             subtotal = product.price * qty
+
+             total += subtotal
+
+             print(f"{product.name} x {qty} = ${subtotal}")
+
+        print(f"\n Total Amount: ${total}\n")
+
+    def run(self):
+
+        while True:
+
+            print("===== Billing App =====")
+
+            print("1. Add product")
+
+            print("2. Shoe products")
+
+            print("3. Add to Cart")
+
+            print("4. Genterate Bill")
+
+            print("5. Exit")
+
+
+
+            choice = input("Enter your choice:")
+
+            if choice == "1":
+
+                self.add_product()
+
+            elif choice == "2":
+
+                self.show_products()
+
+            elif choice == "3":
+
+                self.add_to_cart()
+
+            elif choice == "4":
+
+                self.generate_bill()
+
+            elif choice == "5":
+
+                print("Exiting app. Thank you!")
+
+                break
+
+            else:
+
+                print("Invalid option, try again!\n")
+
+
+app = BillingApp()
+
+app.run()
